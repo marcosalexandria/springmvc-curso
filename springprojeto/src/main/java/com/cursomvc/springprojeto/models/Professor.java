@@ -27,12 +27,9 @@ public class Professor {
 	private StatusProfessor statusProfessor;
 	
 	public Professor() {
-		super();
 	}
 
-	public Professor(Long id, String nome, BigDecimal salario, StatusProfessor statusProfessor) {
-		super();
-		this.id = id;
+	public Professor(String nome, BigDecimal salario, StatusProfessor statusProfessor) {
 		this.nome = nome;
 		this.salario = salario;
 		this.statusProfessor = statusProfessor;
