@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,11 @@ public class ProfessorController {
 	@Autowired
 	ModelMapper mapper;
 	
+	@ModelAttribute(value = "postProfessorDTO")
+	public PostProfessorDTO getPostProfessorDTO(){
+	    return new PostProfessorDTO();
+	}
+	
 	@GetMapping("/professores")
 	public ModelAndView index() {
 		
@@ -40,22 +46,24 @@ public class ProfessorController {
 	public ModelAndView inserirProfessor() {
 		
 		ModelAndView mv = new ModelAndView("professor/novo");
-		mv.addObject("statusProfessor", StatusProfessor.values());
+		mv.addObject("listaStatusProfessor", StatusProfessor.values());
 		return mv;
 	}
 	
 	@PostMapping("/professores")
-	public String create(@Valid PostProfessorDTO dto, //Vai ser avaliado
+	public ModelAndView create(@Valid PostProfessorDTO dto, //Vai ser avaliado
 								BindingResult bindingResult) { //objeto que registra se houve algum esso na requisicao
 		if(bindingResult.hasErrors()) {
 			
-			return "redirect:/professores/novo";
+			ModelAndView mv =  new ModelAndView("professor/novo");
+			mv.addObject("listaStatusProfessor", StatusProfessor.values());
+			return mv;
 		}else {
 			Professor professor = new Professor();
 			professor = mapper.map(dto, professor.getClass());
 			professorRepository.save(professor);
 			
-			return "redirect:/professores";
+			return new ModelAndView("redirect:/professores");
 		}
 		
 	}

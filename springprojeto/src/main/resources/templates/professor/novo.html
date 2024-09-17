@@ -19,26 +19,26 @@
 		<div class="container">
 			<div class="row">
 				
-				<!--Quando submeter, ira chamar a acrtion /professores com o metodo post-->
-				<form action="/professores" method="POST">
+				<!--Quando submeter, ira chamar a acrtion /professores com o metodo post, esse form esta atrelado ao objeto postProfessorDTO-->
+				<form th:object="${postProfessorDTO}" action="/professores" method="POST">
 
 					<div class="mb-3">
 						<label class="form-label">Nome</label>
-						<input class="form-control" type="text" name="nome">
+						<input class="form-control" type="text" th:field="*{nome}"> <!--Atrelanda ao campo nome com th:field-->
 						<div></div>
 					</div>
 
 					<div class="mb-3">
 						<label class="form-label">Salário</label>
-						<input class="form-control" type="text" name="salario">
+						<input class="form-control" type="text" th:field="*{salario}">
 						<div></div>
 					</div>
 
 					<div class="mb-3">
 						<label class="form-label">Status</label>
-						<select class="form-select" name="statusProfessor">
+						<select class="form-select" th:field="*{statusProfessor}">
 													 <!--Enviado do controller pelo ModelAndView-->
-							<option th:each="status : ${statusProfessor}" 
+							<option th:each="status : ${listaStatusProfessor}" 
 									th:value="${status}" 
 									th:text="${status}">
 							</option>
