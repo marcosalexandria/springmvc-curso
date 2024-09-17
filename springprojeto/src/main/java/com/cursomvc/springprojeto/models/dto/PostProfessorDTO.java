@@ -4,9 +4,20 @@ import java.math.BigDecimal;
 
 import com.cursomvc.springprojeto.models.enums.StatusProfessor;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class PostProfessorDTO {
+	
+	@NotBlank
+	@NotNull
 	private String nome;
+	
+	@NotNull
+	@DecimalMin(value = "0.1")	// valor minimo do bigdecimal
 	private BigDecimal salario;
+	
 	private StatusProfessor statusProfessor;
 	
 	public String getNome() {
