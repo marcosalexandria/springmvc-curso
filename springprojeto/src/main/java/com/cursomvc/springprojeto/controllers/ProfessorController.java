@@ -2,6 +2,7 @@ package com.cursomvc.springprojeto.controllers;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cursomvc.springprojeto.models.Professor;
+import com.cursomvc.springprojeto.models.dto.PostProfessorDTO;
 import com.cursomvc.springprojeto.models.enums.StatusProfessor;
 import com.cursomvc.springprojeto.repositories.ProfessorRepository;
 
@@ -16,7 +18,9 @@ import com.cursomvc.springprojeto.repositories.ProfessorRepository;
 public class ProfessorController {
 	
 	@Autowired
-	private ProfessorRepository professorRepository;
+	ProfessorRepository professorRepository;
+	@Autowired
+	ModelMapper mapper;
 	
 	@GetMapping("/professores")
 	public ModelAndView index() {
@@ -38,11 +42,11 @@ public class ProfessorController {
 	}
 	
 	@PostMapping("/professores")
-	public String create(Professor professor) {
+	public String create(PostProfessorDTO dto) {
 		
-		System.out.println();
-		System.out.println(professor);
-		System.out.println();
+		Professor professor = new Professor();
+		professor = mapper.map(dto, professor.getClass());
+		professorRepository.save(professor);
 		
 		return "redirect:/professores";
 	}
