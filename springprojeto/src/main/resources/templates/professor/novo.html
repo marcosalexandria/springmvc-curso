@@ -24,14 +24,20 @@
 
 					<div class="mb-3">
 						<label class="form-label">Nome</label>
-						<input class="form-control" type="text" th:field="*{nome}"> <!--Atrelanda ao campo nome com th:field-->
-						<div></div>
+						<input class="form-control" 
+							   type="text"
+							   th:errorclass="is-invalid"
+							   th:field="*{nome}"> <!--Atrelanda ao campo nome com th:field, vai adicinar is-invalid na class caso tenha um erro, formatando como vermelho o campo e mostrando a mesagem de erro-->
+						<div class="invalid-feedback"  th:errors="*{nome}"></div> <!--mostra a mensagem de erro que vem do campo nome-->
 					</div>
 
 					<div class="mb-3">
 						<label class="form-label">Salário</label>
-						<input class="form-control" type="text" th:field="*{salario}">
-						<div></div>
+						<input class="form-control" 
+							   type="text" 
+							   th:errorclass="is-invalid" 
+							   th:field="*{salario}">
+						<div class="invalid-feedback" th:errors="*{salario}"></div>
 					</div>
 
 					<div class="mb-3">
