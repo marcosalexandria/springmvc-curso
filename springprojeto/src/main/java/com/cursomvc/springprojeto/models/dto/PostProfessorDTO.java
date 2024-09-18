@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class PostProfessorDTO {
 	
-	@NotBlank
+	@NotBlank	//NotBlank.postProfessorDTO.nome
 	@NotNull
 	private String nome;
 	
