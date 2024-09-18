@@ -19,7 +19,7 @@
 			
 			<div class="row">
 				<div class="col-12">
-					<a href="#">Editar</a> <a href="/professores">Voltar</a>
+					<a th:href="@{/professores/{professorId}/editar(professorId = ${professor.id})}">Editar</a> <a href="/professores">Voltar</a>
 				</div>
 			</div>
 		</div>

@@ -29,7 +29,8 @@
 					<td class="col-2" th:text="${professorUnico.statusProfessor.toString()}">STATUS</td>
 					<!--						   @{/url/{crieiUmParametro}(ParametroCriado = ${valor})}		-->
 					<td class="col-1"><a th:href="@{/professores/{professorId}(professorId = ${professorUnico.id})}">Detalhes</a></td>
-					<td class="col-1"><a href="#">Editar</a></td>
+					
+					<td class="col-1"><a th:href="@{/professores/{professorId}/editar(professorId = ${professorUnico.id})}">Editar</a></td>
 					<td class="col-1"><a href="#">Deletar</a></td>
 				</tr>
 			</tbody>
