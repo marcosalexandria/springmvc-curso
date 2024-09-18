@@ -22,12 +22,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="professor : ${professores}"> <!--pegando a lista de professores com o thymeleaf e fazendo um for each-->
-					<th class="col-1" th:text="${professor.Id}">ID</th>
-					<td class="col-4" th:text="${professor.nome}">Nome do Professor</td>
-					<td class="col-2" th:text="${professor.salario}">Salário</td>
-					<td class="col-2" th:text="${professor.statusProfessor.toString()}">STATUS</td>
-					<td class="col-1"><a href="#">Detalhes</a></td>
+				<tr th:each="professorUnico : ${professores}"> <!--pegando a lista de professores com o thymeleaf e fazendo um for each-->
+					<th class="col-1" th:text="${professorUnico.Id}">ID</th>
+					<td class="col-4" th:text="${professorUnico.nome}">Nome do Professor</td>
+					<td class="col-2" th:text="${professorUnico.salario}">Salário</td>
+					<td class="col-2" th:text="${professorUnico.statusProfessor.toString()}">STATUS</td>
+					<!--						   @{/url/{crieiUmParametro}(ParametroCriado = ${valor})}		-->
+					<td class="col-1"><a th:href="@{/professores/{professorId}(professorId = ${professorUnico.id})}">Detalhes</a></td>
 					<td class="col-1"><a href="#">Editar</a></td>
 					<td class="col-1"><a href="#">Deletar</a></td>
 				</tr>

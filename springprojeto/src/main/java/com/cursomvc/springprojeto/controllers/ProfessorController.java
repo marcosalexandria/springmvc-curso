@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -65,8 +66,30 @@ public class ProfessorController {
 			professor = mapper.map(postProfessorDTO, professor.getClass());
 			professorRepository.save(professor);
 			
-			return new ModelAndView("redirect:/professores");
+			return new ModelAndView("redirect:/professores/" + professor.getId());
 		}
 		
+	}
+	
+	@GetMapping("/professores/{id}")
+	public ModelAndView detalhe(@PathVariable Long id) {
+		
+		try {
+			Professor professor = professorRepository.findById(id).get();
+			
+			ModelAndView mv = new ModelAndView("/professor/detalhe");
+			mv.addObject("caminho", CaminhoRequestUtil.caminho());
+			mv.addObject("professor", professor); //enviado o professor
+			
+			
+			
+			return mv;
+		} catch (Exception e) {
+			System.out.println("####################################");
+			System.out.println(e.getMessage());
+			System.out.println("####################################");
+			return new ModelAndView("redirect:/professores");
+		}
+
 	}
 }
