@@ -4,55 +4,19 @@
 <head th:replace="~{fragmentos/fraghead :: head('Novo Professor')}"></head>
 
 <body>
-	
+
 	<header th:replace="~{fragmentos/fragheader :: header('Novo Professor')}"></header>
 
-	<div class="container">
-
+	<main>
 		<div class="container">
 			<div class="row">
 				
-				<!--Quando submeter, ira chamar a acrtion /professores com o metodo post, esse form esta atrelado ao objeto postProfessorDTO-->
-				<form th:object="${postProfessorDTO}" action="/professores" method="POST">
+				<div th:replace="~{fragmentos/fragform :: form(@{/professores})}"></div>
 
-					<div class="mb-3">
-						<label class="form-label">Nome</label>
-						<input class="form-control" 
-							   type="text"
-							   th:errorclass="is-invalid"
-							   th:field="*{nome}"> <!--Atrelanda ao campo nome com th:field, vai adicinar is-invalid na class caso tenha um erro, formatando como vermelho o campo e mostrando a mesagem de erro-->
-						<div class="invalid-feedback"  th:errors="*{nome}"></div> <!--mostra a mensagem de erro que vem do campo nome-->
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Salário</label>
-						<input class="form-control" 
-							   type="text" 
-							   th:errorclass="is-invalid" 
-							   th:field="*{salario}">
-						<div class="invalid-feedback" th:errors="*{salario}"></div>
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label">Status</label>
-						<select class="form-select" th:field="*{statusProfessor}">
-													 <!--Enviado do controller pelo ModelAndView-->
-							<option th:each="status : ${listaStatusProfessor}" 
-									th:value="${status}" 
-									th:text="${status}">
-							</option>
-						</select>
-					</div>
-
-					<button class="btn btn-primary" type="submit">Bubmeter</button>
-					<a href="javascript:history.back()">Voltar</a>
-
-				</form>
 			</div>
-
 		</div>
+	</main>
 
-	</div>
 
 
 
