@@ -145,4 +145,14 @@ public class ProfessorController {
 			return mv;
 		}
 	}
+	
+	@GetMapping("/{id}/deletar")
+	public ModelAndView deletar(@PathVariable Long id){
+		
+
+		Professor professor = professorRepository.findById(id).get();
+		professorRepository.delete(professor);
+		return new ModelAndView("redirect:/professores");
+		
+	}
 }
